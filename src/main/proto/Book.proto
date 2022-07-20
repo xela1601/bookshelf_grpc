@@ -1,0 +1,31 @@
+syntax = "proto3";
+option java_package = "xela.grpc.generated";
+option java_outer_classname = "BookProto";
+
+service BookService {
+  rpc Add(Book) returns (Book) {}
+  rpc Get(Isbn) returns (Book) {}
+  rpc Delete(Isbn) returns (DeleteResponse) {}
+  rpc Update(UpdateBookRequest) returns (Book) {}
+  rpc ListAll(ListBooksRequest) returns (stream Book) {}
+}
+message DeleteResponse {
+  bool success = 1;
+}
+
+message UpdateBookRequest {
+  string isbn = 1;
+  Book new_book = 2;
+}
+message Void {}
+message ListBooksRequest {}
+message Isbn {
+  string value = 1;
+}
+
+message Book {
+  string isbn = 1;
+  string title = 2;
+  string author = 3;
+
+}
